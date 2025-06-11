@@ -31,3 +31,8 @@ docker compose up
 
 * **Frontend:** [http://localhost](http://localhost)
 * **Backend:** [http://localhost:5000](http://localhost:5000)
+
+### Observação: 
+
+O projeto demora muito para buildar e iniciar na primeira execução. </br>
+As próximas execuções são menos demoradas.
