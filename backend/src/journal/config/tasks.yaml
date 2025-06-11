@@ -1,0 +1,59 @@
+birthday_identifier_task:
+  description: >
+    Conduz uma pesquisa esmiuçada na frase: {phrase}
+    Certifica com certeza se essa frase se trata ou não de uma solicitação de agendamento de aniversário
+  expected_output: >
+    Apenas um número inteiro, 1 ou 0
+    1 caso seja uma solicitação de agendamento de aniversário e 0 caso não seja
+  agent: birthday_identifier
+  output_file: report.md
+
+birthday_extraction_task:
+  description: >
+    Com base no resultado da tarefa anterior, se for identificado como uma solicitação de aniversário (resultado = 1), siga as regras abaixo:
+    
+    IMPORTANTE: Esta tarefa deve retornar APENAS um JSON válido, sem texto adicional.
+    
+    Extrair todas as informações relevantes da frase: {phrase}
+    Analisar cuidadosamente a frase para identificar:
+    - subject: assunto principal
+    - date: data mencionada (formato YYYY-MM-DD, assumindo o ano atual em que estamos)
+    - name: nome da pessoa
+    - description: características da pessoa ou descrições
+    - type: sempre "birthday"
+    
+    REGRAS CRÍTICAS:
+    - Use apenas aspas duplas (") no JSON
+    - Não adicione explicações ou texto extra
+    - Se algum campo não for encontrado, use string vazia ""
+    - O JSON deve ser válido e parseável
+  expected_output: >
+    JSON válido no formato exato:
+    {"subject": "string", "date": "YYYY-MM-DD", "name": "string", "description": "string", "type": "birthday"}
+    
+    APENAS o JSON, mais nada.
+  agent: birthday_extractor
+  context: [birthday_identifier_task]
+  output_file: output/birthday_extraction.json
+
+gift_suggestion_task:
+  description: >
+    Com base nas informações de aniversário extraídas na tarefa anterior, analisar os dados da pessoa e sugerir presentes apropriados.
+    
+    Você receberá um JSON com informações estruturadas incluindo:
+    - name: nome da pessoa
+    - description: características e descrições da pessoa
+    - subject: contexto do aniversário
+    - date: data do aniversário
+    
+    Use essas informações, especialmente a descrição, para sugerir presentes personalizados e adequados.
+  expected_output: >
+    Uma lista numerada com 5 sugestões de presentes, cada sugestão em uma linha separada.
+    Formato:
+    1. [Sugestão 1]
+    2. [Sugestão 2]
+    3. [Sugestão 3]
+    4. [Sugestão 4]
+    5. [Sugestão 5]
+  agent: gift_suggestor
+  context: [birthday_extraction_task]

@@ -1,0 +1,32 @@
+services:
+  backend:
+    build: .
+    container_name: backend
+    hostname: backend
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    command: bash -c "crewai install && flask --app api run --host=0.0.0.0 --port=5000"
+    networks:
+      - journal_net
+  
+  frontend:
+    image: nginx:1.27.5
+    container_name: frontend
+    hostname: frontend
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - backend
+    networks:
+      - journal_net
+
+networks:
+  journal_net:
+    name: journal_net
+    driver: bridge

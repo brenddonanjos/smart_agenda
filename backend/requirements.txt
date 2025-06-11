@@ -1,0 +1,7 @@
+Flask
+flask-cors
+crewai
+crewai-tools
+uv
+openai-whisper
+setuptools-rust

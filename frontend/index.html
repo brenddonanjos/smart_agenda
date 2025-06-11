@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gravador de Áudio IA</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Áudio de Aniversário para JSON</h1>
+      <label for="controls">Grave sua solicitação de aniversário</label>
+      <p>
+        <small>Fale algo como: <i>"Aniversário da Beatriz, dia 22 de Março, ela é uma mulher de negócios, bem humorada e moderna"</i></small>
+      </p>
+
+      <div class="controls">
+        <button id="recordButton">Gravar</button>
+        <button id="stopButton" disabled>Parar</button>
+      </div>
+
+      <audio id="audioPlayback" controls></audio>
+      
+      <button id="sendButton" disabled>Enviar Áudio</button>
+
+      <hr />
+
+      <div id="output" class="output">
+        <p>O resultado em JSON aparecerá aqui...</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
