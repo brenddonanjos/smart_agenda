@@ -26,3 +26,8 @@ Execute o comando:
 ```
 docker compose up
 ````
+
+## Links do Projeto
+
+* **Frontend:** [http://localhost](http://localhost)
+* **Backend:** [http://localhost:5000](http://localhost:5000)
